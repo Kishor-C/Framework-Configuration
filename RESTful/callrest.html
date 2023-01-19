@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form action="#"  name = "storeForm">
+		Id <input type = "text" name = "id"> 
+		<br>
+		Name <input type = "text" name = "name">
+		<br>
+		Age <input type = "text" name = "age">
+		<br>
+		<input type = "button" value = "submit" onclick = "store()">
+	</form>
+	<a href = "#" onclick = "find()">Find</a>
+	<div id = "content"></div>
+	<script type="text/javascript">
+		var req = new XMLHttpRequest();
+		function store() {
+			var id = document.storeForm.id.value;
+			var name = document.storeForm.name.value;
+			var age = document.storeForm.age.value;
+			req.open("POST", "http://localhost:8080/simple-maven-app/rest/api/",true);
+			req.setRequestHeader("Content-Type","application/json")
+			req.onreadystatechange = function() {
+				if(req.readyState == 4) {
+					document.getElementById("content").innerHTML = "DONE!"
+				}	
+			}
+			var obj = {"id":id,"name":name,"age":age}
+			var jsonObj = JSON.stringify(obj);
+			req.send(jsonObj);
+		}
+		function find() {
+			req.open("GET", "http://localhost:8080/simple-maven-app/rest/api/",true);
+			req.send();
+			req.onreadystatechange = function() {
+				if(req.readyState == 4) {
+					var text = req.responseText;
+					//var jsObj = JSON.parse
+					document.getElementById("content").innerHTML = text;
+				}	
+			}
+		}
+	</script>
+</body>
+</html>
