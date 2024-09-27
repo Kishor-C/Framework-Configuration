@@ -2,7 +2,7 @@
 # Steps to use typescript in existing vite-react project 
 
 ## 1) Step 1/6
-** Install dev dependencies ** 
+**Install dev dependencies** 
 
 ##
 		npm install -D typescript @types/react @types/react-dom
